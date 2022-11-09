@@ -1,0 +1,249 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <windows.h>
+
+#define N 10
+#define M 32
+
+/*int BorderTracking(char place[N][M], int x, int y) {
+
+	int Ox, Oy;
+
+	Ox = x;  //Координаты для отслежки попытки пересечь границу
+	Oy = y;  //Координаты для отслежки попытки пересечь границу
+
+	if (place[x][y] == '|') {  //Постоянная проверка на пересечние границы
+
+		x = Ox;  //Присвоение предыдущих координат в случае попытки пересечь границу
+		y = Oy;
+
+	}
+
+	return x, y;
+
+}*/
+
+/*int SphereMove(int SphereX, int SphereY, char place[N][M]) {
+
+	int direction = 1 + rand() % 2;  //Генерация случайного направления со старта игры(Влево по диагонали или вправо)
+	int x, y;
+
+	if (direction == 1) {
+	
+		while(SphereX != 8) {
+
+			SphereX++;
+			SphereY--;
+
+		}
+		
+	}
+
+	return (SphereY, SphereX);
+
+}*/
+
+int main() {
+
+	char place[N][M];
+	int i;
+	int x = 8, y = 14;
+	int Ox, Oy;
+	char key;
+	int SphereX = 7, SphereY = 14;
+	int direction, lastdirection/*1 + rand() % 2*/;  //Генерация случайного направления со старта игры(Влево по диагонали или вправо)
+	int BorderX, BorderY;
+
+	direction = 1;
+
+	do {
+
+		sprintf_s(place[0], "-------------------------------");  //Отрисовка верхней границы
+		for (i = 1; i < N - 1; i++) {  
+
+			sprintf_s(place[i], "|                             |");  //Отрисовка боковых границ
+			 
+		}
+		sprintf_s(place[9], "-------------------------------");  //Отрисовка нижней границы
+
+		place[x][y] = '-';  //Ставим платформу по координатам внутри границ
+		place[SphereX][SphereY] = '*';  //Ставим шарик по координатам внутри границ
+	
+		system("cls");  //Очистка консоли от предыдущего показанного кадра
+
+		for (i = 0; i < N; i++) {  //Вывод в консоль: границы, платформа, шарик
+
+			printf("%s\n", place[i]);
+
+		}
+
+		//int DirectionTrackingX, DirectionTrackingY;
+
+		//SphereY, SphereX = SphereMove(SphereX, SphereY, place);
+
+		Ox = x;  //Координаты для отслежки попытки пересечь границу
+		Oy = y;  //Координаты для отслежки попытки пересечь границу
+
+		key = _getch();  //Ожидание нажатия кнопки
+		if (key == 'a') y--;  //При нажатии платформа поедет влево
+		if (key == 'd') y++;  //Аналогично, только поедет вправо
+
+		//x, y = BorderTracking(place, x, y);
+
+		if (place[x][y] == '|') {  //Постоянная проверка на пересечние границы
+
+			x = Ox;  //Присвоение предыдущих координат в случае попытки пересечь границу
+			y = Oy;
+
+		}
+
+		BorderX = SphereX;
+		BorderY = SphereY;
+
+		if (direction == 1) {
+
+			SphereX--;
+			SphereY--;
+
+			if (place[SphereX][SphereY] == '-') {  //Постоянная проверка на пересечние границы
+
+				SphereX = BorderX;
+				SphereY = BorderY;
+
+				direction = 2;
+
+				SphereX++;
+				SphereY--;
+
+			}
+
+			lastdirection = 1;
+
+		}
+		else if (direction == 2) {
+
+			SphereX++;
+			SphereY--;
+
+			if (place[SphereX][SphereY] == '|') {  //Постоянная проверка на пересечние границы
+
+				SphereX = BorderX;
+				SphereY = BorderY;
+
+				direction = 3;
+
+				SphereX++;
+				SphereY++;
+
+				lastdirection = 2;
+
+			}
+
+			if ((place[SphereX][SphereY] == '-')) {  //Постоянная проверка на пересечние границы
+
+				SphereX = BorderX;
+				SphereY = BorderY;
+
+				direction = 3;
+
+				SphereX--;
+				SphereY++;
+
+			}
+
+			if ((place[SphereX][SphereY] == '-') && (SphereY > M / 2)) {  //Постоянная проверка на пересечние границы
+
+				SphereX = BorderX;
+				SphereY = BorderY;
+
+				direction = 1;
+
+				SphereX--;
+				SphereY--;
+
+			}
+
+			lastdirection = 2;
+
+		}
+		else if (direction == 3) {
+
+			SphereX--;
+			SphereY++;
+
+			if (place[SphereX][SphereY] == '-') {  //Постоянная проверка на пересечние границы
+
+				SphereX = BorderX;
+				SphereY = BorderY;
+
+				direction = 4;
+
+				SphereX++;
+				SphereY++;
+
+			}
+
+			if (place[SphereX][SphereY] == '|') {  //Постоянная проверка на пересечние границы
+
+				SphereX = BorderX;
+				SphereY = BorderY;
+
+				direction = 1;
+
+				SphereX--;
+				SphereY--;
+
+			}
+
+			lastdirection = 3;
+
+		}
+		else if (direction == 4) {
+
+			SphereX++;
+			SphereY++;
+
+			if ((place[SphereX][SphereY] == '-') && (lastdirection == 4)) {  //Постоянная проверка на пересечние границы
+
+				SphereX = BorderX;
+				SphereY = BorderY;
+
+				direction = 3;
+
+				SphereX--;
+				SphereY++;
+
+			}
+
+			if ((place[SphereX][SphereY] == '-') && (lastdirection == 2)) {  //Постоянная проверка на пересечние границы
+
+				SphereX = BorderX;
+				SphereY = BorderY;
+
+				direction = 1;
+
+				SphereX--;
+				SphereY--;
+
+			}
+
+			if (place[SphereX][SphereY] == '|') {  //Постоянная проверка на пересечние границы
+
+				SphereX = BorderX;
+				SphereY = BorderY;
+
+				direction = 2;
+
+				SphereX++;
+				SphereY--;
+
+			}
+
+			lastdirection = 4;
+
+		}
+
+	} while (key != 'z');  //Кнопка выхода из игры
+
+}
