@@ -13,13 +13,13 @@ int main() {
 
 	char temp[N][M];
 
-	int SphereX = 7, SphereY = 11;
+	int SphereX = 7, SphereY = 15;
 	int Direction, LastDirection;
-	int LastBorderX = 7, LastBorderY = 11;
+	int LastBorderX = 7, LastBorderY = 15;
 	int Angle;
 
 	char key = 'q';
-	int x = 8, y = 14;
+	int x = 8, y = 15;
 	int Ox, Oy;
 
 	bool Pressed = false;
@@ -45,7 +45,7 @@ int main() {
 			sprintf_s(place[i], "|                               |");  //Отрисовка боковых границ
 
 		}
-		sprintf_s(place[9], "#-------------------------------#");  //Отрисовка нижней границы
+		sprintf_s(place[9], "                                ");  //Отрисовка нижней границы
 
 		for (i = 2; i < N / 2; i += 2) {
 
@@ -397,3 +397,4 @@ int main() {
 	printf("You have lose!");
 
 }
+
