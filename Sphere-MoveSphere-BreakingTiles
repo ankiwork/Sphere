@@ -4,7 +4,7 @@
 #include <windows.h>
 
 #define N 10
-#define M 35
+#define M 34
 
 int main() {
 
@@ -37,17 +37,17 @@ int main() {
 
 	do {
 
-		sprintf_s(place[0], "#--------------------------------#");  //Отрисовка верхней границы
+		sprintf_s(place[0], "#-------------------------------#");  //Отрисовка верхней границы
 		for (i = 1; i < N - 1; i++) {
 
-			sprintf_s(place[i], "|                                |");  //Отрисовка боковых границ
+			sprintf_s(place[i], "|                               |");  //Отрисовка боковых границ
 
 		}
-		sprintf_s(place[9], "#--------------------------------#");  //Отрисовка нижней границы
+		sprintf_s(place[9], "#-------------------------------#");  //Отрисовка нижней границы
 
 		for (i = 1; i < N / 2; i++) {
 
-			for (j = 1; j < M - 2; j++) {
+			for (j = 2; j < M - 2; j+=2) {
 				
 				if (temp[i][j] == '^') {
 
@@ -314,7 +314,7 @@ int main() {
 		LastBorderX = SphereX;
 		LastBorderY = SphereY;
 
-		Sleep(50);
+		Sleep(20);
 
 	} while (SphereX != 9);  //Кнопка выхода из игры
 
