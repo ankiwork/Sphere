@@ -128,8 +128,6 @@ int main() {
 
 			if ((place[SphereX][SphereY] == '-') && (Angle == 3)) {
 
-				temp[SphereX][SphereY] = ' ';
-
 				SphereX = LastBorderX;
 				SphereY = LastBorderY;
 
@@ -142,8 +140,6 @@ int main() {
 			}
 
 			if ((place[SphereX][SphereY] == '-') && (Angle == 1)) {
-
-				temp[SphereX][SphereY] = ' ';
 
 				SphereX = LastBorderX;
 				SphereY = LastBorderY;
@@ -177,8 +173,6 @@ int main() {
 
 			if ((place[SphereX][SphereY] == '-') && (Angle == 1)) {
 
-				temp[SphereX][SphereY] = ' ';
-
 				SphereX = LastBorderX;
 				SphereY = LastBorderY;
 
@@ -192,8 +186,6 @@ int main() {
 
 			if ((place[SphereX][SphereY] == '-') && (Angle == 2)) {
 
-				temp[SphereX][SphereY] = ' ';
-
 				SphereX = LastBorderX;
 				SphereY = LastBorderY;
 
@@ -206,8 +198,6 @@ int main() {
 			}
 
 			if ((place[SphereX][SphereY] == '-') && (Angle == 4)) {
-
-				temp[SphereX][SphereY] = ' ';
 
 				SphereX = LastBorderX;
 				SphereY = LastBorderY;
@@ -342,5 +332,7 @@ int main() {
 		Sleep(20);
 
 	} while (SphereX != 9);  //Кнопка выхода из игры
+
+	printf("You have lose!");
 
 }
