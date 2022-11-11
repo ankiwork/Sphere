@@ -5,6 +5,7 @@
 
 #define N 10
 #define M 34
+#define T 300
 
 int main() {
 
@@ -99,19 +100,19 @@ int main() {
 		Ox = x;  //Координаты для отслежки попытки пересечь границу
 		Oy = y;  //Координаты для отслежки попытки пересечь границу
 
-		if (_getch() == 'a') {
+		if (_kbhit()) {
 
-			y--;
+			if (_getch() == 'a') {
 
-		}
-		else if (_getch() == 'd') {
+				y--;
+				
+			}
 
-			y++;
+			if (_getch() == 'd') {
 
-		}
-		else {
+				y++;
 
-			continue;
+			}
 
 		}
 
@@ -168,6 +169,8 @@ int main() {
 
 			}
 
+			Sleep(T);
+
 		}
 		else if (Direction == 2) {
 
@@ -187,7 +190,7 @@ int main() {
 
 			}
 
-			if ((place[SphereX][SphereY] == '-') && (Angle == 1)) {
+			if (((place[SphereX][SphereY] == '-') && (Angle == 1)) || (place[SphereX][SphereY + 1] == '-')) {
 
 				SphereX = LastBorderX;
 				SphereY = LastBorderY;
@@ -212,6 +215,8 @@ int main() {
 				Angle = 2;
 
 			}
+
+			Sleep(T);
 
 		}
 		else if (Direction == 3) {
@@ -270,6 +275,8 @@ int main() {
 				Angle = 3;
 
 			}
+
+			Sleep(T);
 
 		}
 		else if (Direction == 4) {
@@ -360,6 +367,8 @@ int main() {
 
 			}
 
+			Sleep(T);
+
 		}
 
 		LastBorderX = SphereX;
@@ -390,11 +399,10 @@ int main() {
 
 		c = 0;
 
-		Sleep(20);
+		
 
-	} while (SphereX != 9);  //Кнопка выхода из игры
+	} while (SphereX != 10);  //Кнопка выхода из игры
 
 	printf("You have lose!");
 
 }
-
