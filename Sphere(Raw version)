@@ -23,8 +23,6 @@ int main() {
 	int x = 8, y = 15;
 	int Ox, Oy;
 
-	bool Pressed = false;
-
 	Direction = 1;
 	Angle = Direction;
 
@@ -100,7 +98,7 @@ int main() {
 		Ox = x;  //Координаты для отслежки попытки пересечь границу
 		Oy = y;  //Координаты для отслежки попытки пересечь границу
 
-		if (_kbhit()) {
+		if (_kbhit(Pressed)) {
 
 			if (_getch() == 'a') {
 
